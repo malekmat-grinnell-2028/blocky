@@ -28,7 +28,7 @@ public class BlockyGame {
         }
     }
     
-    private void processMovement() {
+    public void processMovement() {
         Position nextPos;
         switch(movement) {
         case NONE:
@@ -39,6 +39,7 @@ public class BlockyGame {
             break;
         case RIGHT:
             nextPos = activePiece.getPosition().add(0, 1);
+            break;
         default:
             throw new IllegalStateException("Unrecognized direction: " + movement.name());
         }

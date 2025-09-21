@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.Key;
 
 import javax.swing.JFrame;
 
@@ -31,9 +32,10 @@ public class Blocky {
                 int code = e.getKeyCode();
                 if (code == e.VK_LEFT) {
                     game.setDirection(Direction.LEFT);
-                } else if (code == e.VK_RIGHT) {
+                } if (code == e.VK_RIGHT) {
                     game.setDirection(Direction.RIGHT);
                 }
+                game.processMovement();
             }
             
             public void keyReleased(KeyEvent e) {
