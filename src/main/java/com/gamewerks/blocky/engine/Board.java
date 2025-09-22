@@ -53,20 +53,22 @@ public class Board {
     }
     
     public void deleteRow(int n) {
-        for (int row = 0; row < n - 1; row++) {
-            for (int col = 0; col < Constants.BOARD_WIDTH; col++) {
-                well[row][col] = well[row+1][col];
-            }
-        }
         for (int col = 0; col < Constants.BOARD_WIDTH; col++) {
             well[n][col] = false;
         }
+        for (int row = n ; row > 0; row--) {
+            for (int col = 0; col < Constants.BOARD_WIDTH; col++) {
+                well[row][col] = well[row-1][col];
+            }
+        }
     }
     
-    public void deleteRows(List rows) {
+    public void deleteRows(List<Boolean> rows) {
         for (int i = 0; i < rows.size(); i++) {
-            int row = (Integer) rows.get(i);
-            deleteRow(row);
+            if(rows.get(i)) {
+                deleteRow(i);
+            }
+            
         }
     }
     
@@ -79,10 +81,12 @@ public class Board {
     }
     
     public List getCompletedRows() {
-        List completedRows = new LinkedList();
+        List<Boolean> completedRows = new LinkedList<Boolean>();
         for (int row = 0; row < Constants.BOARD_HEIGHT; row++) {
             if (isCompletedRow(row)) {
-                completedRows.add(well[row]);
+                completedRows.add(true);
+            } else {
+                completedRows.add(false);
             }
         }
         return completedRows;
