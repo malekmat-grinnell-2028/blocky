@@ -4,16 +4,27 @@ _(Gamewerks corporation internal code—do not share!)_
 
 ## Credits
 
-Primary developer: _(TODO: fill me in)_
+Primary developers: Carmela Davidson
+                    Matt Malek
 
 ### Resources Used
 
-+ _(TODO: fill me in)_
-+ ...
-+ ...
++ Oracle API 17
++ David Rhoades
++ Professor Osera
++ TTAP Textbook
++ Java version 17
++ VSCode
++ W3Schools (for type info: deleteRows)
 
 ## Changelog
 
 ~~~console
-(TODO: fill me in with the text reported from `git log`!)
+-Set Java version to 17 in pom.xml
+-Fixed equality when checking if activePiece is null
+-Fixed process movement to break after evaluating to RIGHT
+-Fixed gravity so it falls from top to bottom, and set spawn to top
+-Fixed type in deleteRows param
+-Fixed deleteRows method to properly delete completed rows and shift   blocks down
+-Added "RandomizePieceOrder" and variables to track through an array of random pieces for the game to give to user.
 ~~~
