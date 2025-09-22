@@ -1,5 +1,8 @@
 package com.gamewerks.blocky.engine;
 
+import java.lang.Math;
+import java.util.ArrayList;
+
 import com.gamewerks.blocky.util.Constants;
 import com.gamewerks.blocky.util.Position;
 
@@ -9,19 +12,48 @@ public class BlockyGame {
     private Board board;
     private Piece activePiece;
     private Direction movement;
+
+    private int index = 0;
+    private PieceKind[] pieces = new PieceKind[7];
+
     
     private int lockCounter;
     
+
+    public void randomizePieceOrder() {
+        ArrayList<PieceKind> pieceArrayList = new ArrayList<PieceKind>();
+        for(int i = 0; i<PieceKind.ALL.length; i++) {
+            pieceArrayList.add(PieceKind.ALL[i]);
+        }
+        PieceKind[] pieceArray = PieceKind.ALL;
+        for(int i = 0; i < pieceArrayList.size(); i++){
+            int rand = (int) (Math.random()*(7-i));
+            pieceArray[i] = pieceArrayList.get(rand);
+            pieceArrayList.remove(rand);
+        }
+        pieces = pieceArray;
+    }
+
     public BlockyGame() {
+        new java.util.Random();
         board = new Board();
         movement = Direction.NONE;
         lockCounter = 0;
+        randomizePieceOrder();
         trySpawnBlock();
     }
     
     private void trySpawnBlock() {
         if (activePiece == null) {
-            activePiece = new Piece(PieceKind.I, new Position(2, Constants.BOARD_WIDTH / 2 - 2));
+            if(index == pieces.length-1) {
+                randomizePieceOrder();
+                index = 0;
+            }
+            PieceKind p = pieces[index];
+            //switch(index):
+                
+            activePiece = new Piece(p, new Position(3, Constants.BOARD_WIDTH / 2 - 2));
+            index++;
             if (board.collides(activePiece)) {
                 System.exit(0);
             }
